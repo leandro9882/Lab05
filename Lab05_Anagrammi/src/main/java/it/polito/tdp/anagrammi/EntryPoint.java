@@ -2,6 +2,9 @@ package it.polito.tdp.anagrammi;
 
 import javafx.application.Application;
 import static javafx.application.Application.launch;
+
+import it.polito.tdp.anagrammi.model.Ricerca;
+
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -12,15 +15,19 @@ public class EntryPoint extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/Scene.fxml"));
-        
+    	FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Scene.fxml"));
+        Parent root = loader.load();
         Scene scene = new Scene(root);
-        scene.getStylesheets().add("/styles/Styles.css");
         
-        stage.setTitle("JavaFX and Maven");
+        Ricerca model = new Ricerca();
+        FXMLController controller = loader.getController();
+        controller.setRicerca(model);
+        
+        stage.setTitle("Lab05");
         stage.setScene(scene);
         stage.show();
     }
+    
 
     /**
      * The main() method is ignored in correctly deployed JavaFX application.
